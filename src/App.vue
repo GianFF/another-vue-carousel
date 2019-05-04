@@ -1,15 +1,23 @@
 <template>
   <div id="app">
-    <div> 
+
+    <div id="title"> 
       <h1> Implementing a Carousel in Vue.js</h1>
       <h5> (as if nobody had done it yet ...) </h5>
+      <h2> In order to work in IE11 </h2>
     </div>
-    <br>    
-    <Carousel :itemsToShow="3" :itemWidth="200" :itemHeight="200" :itemMarginRight="10" :arrowMargin="0" :arrowWidth="20" :arrowHeight="50">
+
+    <div class="separator"> 
+      <hr id="first-line">
+      <hr id="second-line">
+    </div>
+
+    <Carousel :itemsToShow="3" :itemWidth="200" :itemHeight="200" :itemMarginRight="10" :arrowMargin="0" :arrowWidth="20" :arrowHeight="50" id="first-carousel">
       <div v-for="item in items" v-bind:key="`item-${item}`" class="item">
         <img alt="Vue logo" src="./assets/logo.png">
       </div>
     </Carousel>
+    
   </div>
 </template>
 
@@ -36,7 +44,7 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 160px;
+    margin-top: 60px;
 
     display: flex;
     flex-direction: column;
@@ -44,6 +52,44 @@ export default {
     align-items: center;
   }
 
+  #title {
+    margin-bottom: 60px;
+  }
+  h1, h5, h2 {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  h1, h2 {
+    color: #35495e
+  }
+  h5 {
+    color: #40B783;
+  }
+
+  .separator {
+    width: 80%;
+    height: 10px;
+  }
+  hr {
+    margin-bottom: 0px;
+    margin-top: 0px;
+
+    width: 100%;
+    height: 100%;
+  }
+
+  #first-line {
+    background-color: #35495e;
+    border: 1px solid #35495e;
+  }
+  #second-line {
+    background-color: #40B783;
+    border: 1px solid #40B783;
+  }
+
+  #first-carousel {
+    margin-top: 60px;
+  }
   /*
   - NOTAR que los items tienen que tener 
     * un margin-right igual al que se le pasa al carousel por props (itemMargin) 

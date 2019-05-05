@@ -1,14 +1,14 @@
 <template>
   <div class="carousel-container" v-bind:style="carouselContainerStyles">
-    <div v-on:click="navLeft" class="nav nav-left" v-bind:style="arrowLeftStyles">
+    <div v-if="navLeftEnabled" v-on:click="navLeft" class="nav nav-left" v-bind:style="arrowLeftStyles">
       <div class="chevron-wrapper">
         <font-awesome-icon icon="chevron-left"></font-awesome-icon>
       </div>
     </div>
-    <div class="carousel-content" v-bind:style="contentStyles">
+    <div class="carousel-content" v-bind:style="contentStyles" >
       <slot></slot>
     </div>
-    <div v-on:click="navRight" class="nav nav-right" v-bind:style="arrowRightStyles">
+    <div v-if="navRightEnabled" v-on:click="navRight" class="nav nav-right" v-bind:style="arrowRightStyles">
       <div class="chevron-wrapper">
         <font-awesome-icon icon="chevron-right"></font-awesome-icon>
       </div>
@@ -19,7 +19,7 @@
 <script>
   export default {
     name: 'Carousel',
-    props: ['itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight',],
+    props: ['itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'navCallback', 'itemsToSlide',],
     data() {
       return {
         // defaults:
@@ -30,9 +30,17 @@
         arrowMarginData: this.arrowMargin      || 0, 
         arrowWidthData:  this.arrowWidth       || 15,
         arrowHeightData: this.arrowHeight      || 20,
+        itemsToSlideData: this.itemsToSlide    || 2,
+        index: 0,
       }
     },
     computed: {
+      navRightEnabled() {
+        return this.canNavRight()
+      },
+      navLeftEnabled() {
+        return this.canNavLeft()
+      },
       contentWidth() {
         const itemsWidth = this.itemsToShowData * this.itemWidthData
         const itemsMargin = (this.itemsToShowData - 1) * this.itemMarginData
@@ -41,25 +49,40 @@
         return itemsWidth + itemsMargin + arrowsMargin
       },
       contentStyles() {
-        return `width: ${this.contentWidth}px; height: ${this.itemHeightData}px;`
+        return `width: ${this.contentWidth}px; height: ${this.itemHeightData}px`
       },
       carouselContainerStyles() {
         const width = this.contentWidth + this.arrowWidthData * 2
-        return `width: ${width}px; height: ${this.itemHeightData}px;`
+        return `width: ${width}px; height: ${this.itemHeightData}px`
       },
       arrowLeftStyles() {
-        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px;`
+        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px`
       },
       arrowRightStyles() {
-        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px;`
+        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px`
       }
     },
     methods: {
+      offset() {
+        const totalItemWidth = this.itemWidthData + this.itemMarginData
+        const offset = this.itemsToSlideData * totalItemWidth
+        return offset
+      },
       navLeft() {
-        console.log("navLeft")
+        this.index -= this.itemsToSlideData
+        console.log(this.index)
+        this.navCallback(this.offset())
       },
       navRight() {
-        console.log("navRight")
+        this.index += this.itemsToSlideData 
+        console.log(this.index)
+        this.navCallback(-this.offset())
+      },
+      canNavRight() {
+        return true 
+      },
+      canNavLeft() {
+        return this.index > 0 
       },
     },
   }
@@ -82,7 +105,7 @@
   /* TODO: estos estilos deberian estar en el componente Arrow que deberia pasarsele al carousel */ 
   .nav {    
     background-color: #cac4c4;
-    
+    z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;

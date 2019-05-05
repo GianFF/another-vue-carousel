@@ -12,12 +12,19 @@
       <hr id="second-line">
     </div>
 
-    <Carousel :itemsToShow="3" :itemWidth="200" :itemHeight="200" :itemMarginRight="10" :arrowMargin="0" :arrowWidth="20" :arrowHeight="50" id="first-carousel">
-      <div v-for="item in items" v-bind:key="`item-${item}`" class="item">
+    <Carousel :itemsToShow="3" 
+              :itemWidth="200" 
+              :itemHeight="200" 
+              :itemMarginRight="10" 
+              :arrowMargin="0" 
+              :arrowWidth="20" 
+              :arrowHeight="50" 
+              :navCallback="navCallback"
+              id="first-carousel">
+      <div v-for="item in items" v-bind:key="`item-${item}`" class="item" v-bind:style="`transform: translateX(${offset}px)`" >
         <img alt="Vue logo" src="./assets/logo.png">
       </div>
     </Carousel>
-    
   </div>
 </template>
 
@@ -32,7 +39,13 @@ export default {
   data() {
     return {
       items: [1, 2, 3, 4 , 5, 6],
+      offset: 0, /* TODO: esta propiedad es necesaria para que se aplique la transición. Habría que extraer un componente que tenga esta propiedad para desacoplar. */
     }
+  },
+  methods: {
+    navCallback(offset) {  /* TODO: este metodo es necesario para que se aplique la transición. Habría que extraer un componente que lo tenga para desacoplar. */
+      this.offset += offset
+    },
   }
 }
 </script>
@@ -93,6 +106,8 @@ export default {
     * un width y height igual al que se le pasa al carousel por props (itemWidth y itemHeight)
   */ 
   .item {
+    transition: transform 0.7s ease 0s; /* TODO: esta propiedad es necesaria para que se aplique la transición. Habría que extraer un componente que tenga esta propiedad para desacoplar. */
+
     margin-right: 10px; 
     width: 200px;
     height: 200px;

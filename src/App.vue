@@ -8,11 +8,11 @@
     </div>
 
     <div class="separator"> 
-      <hr id="first-line">
-      <hr id="second-line">
+      <hr class="first-line">
+      <hr class="second-line">
     </div>
 
-    <h3> This Carousel has 3 items </h3>
+    <h3> This Carousel isn't coupled with the items </h3>
     <Carousel :itemsLength="firstCarouselItems.length"
               :itemsToShow="3" 
               :itemWidth="200" 
@@ -21,104 +21,55 @@
               :arrowMargin="0" 
               :arrowWidth="20" 
               :arrowHeight="50" 
-              :navCallback="navCallback"
-              id="first-carousel">
-      <div v-for="item in firstCarouselItems" v-bind:key="`first-item-${item}`" class="item" v-bind:style="`transform: translateX(${offset}px)`" >
-        <img alt="Vue logo" src="./assets/logo.png">
-      </div>
+              id="carousel">
+      <CarouselItem v-for="item in firstCarouselItems" v-bind:key="`item-${item}`">
+        <img alt="Vue logo" src="./assets/logo.png" class="item">
+      </CarouselItem>
     </Carousel>
 
-    <div class="separator"> 
-      <hr id="first-line">
-      <hr id="second-line">
-    </div>
-
-    <h3> This Carousel has 6 items </h3>
-    <Carousel :itemsLength="secondCarouselItems.length"
-              :itemsToShow="3" 
-              :itemWidth="200" 
-              :itemHeight="200" 
-              :itemMarginRight="10" 
-              :arrowMargin="0" 
-              :arrowWidth="20" 
-              :arrowHeight="50" 
-              :navCallback="navCallback"
-              id="second-carousel">
-      <div v-for="item in secondCarouselItems" v-bind:key="`second-item-${item}`" class="item" v-bind:style="`transform: translateX(${offset}px)`" >
-        <img alt="Vue logo" src="./assets/logo.png">
-      </div>
-    </Carousel>
-
-    <div class="separator"> 
-      <hr id="first-line">
-      <hr id="second-line">
-    </div>
-
-    <h3> This Carousel has 8 items </h3>
-    <Carousel :itemsLength="thirdCarouselItems.length"
-              :itemsToShow="3" 
-              :itemWidth="200" 
-              :itemHeight="200" 
-              :itemMarginRight="10" 
-              :arrowMargin="0" 
-              :arrowWidth="20" 
-              :arrowHeight="50" 
-              :navCallback="navCallback"
-              id="third-carousel">
-      <div v-for="item in thirdCarouselItems" v-bind:key="`third-item-${item}`" class="item" v-bind:style="`transform: translateX(${offset}px)`" >
-        <img alt="Vue logo" src="./assets/logo.png">
-      </div>
-    </Carousel>
-
-    <div class="separator"> 
-      <hr id="first-line">
-      <hr id="second-line">
-    </div>
-
-    <h3> A Carousel with different styles </h3>
-    <Carousel :itemsLength="secondCarouselItems.length"
-              :itemsToShow="2" 
-              :itemWidth="100" 
-              :itemHeight="300" 
-              :itemMarginRight="5" 
-              :arrowMargin="0" 
-              :arrowWidth="20" 
-              :arrowHeight="50" 
-              :navCallback="navCallback"
-              itemsToSlide="1"
-              id="third-carousel">
-      <div v-for="item in secondCarouselItems" v-bind:key="`fourth-item-${item}`" class="fourth-item" v-bind:style="`transform: translateX(${offset}px)`" >
-        <img alt="Vue logo" src="./assets/logo.png" width="100px" height="300px">
-      </div>
-    </Carousel>
   </div>
 </template>
 
 <script>
 import Carousel from './components/Carousel.vue'
+import CarouselItem from './components/CarouselItem.vue'
 
 export default {
   name: 'app',
   components: {
-    Carousel
+    Carousel,
+    CarouselItem,
   },
   data() {
     return {
-      firstCarouselItems: [1, 2, 3],
-      secondCarouselItems: [1, 2, 3, 4 , 5, 6],
-      thirdCarouselItems: [1, 2, 3, 4, 5, 6, 7, 8],
-      offset: 0, /* TODO: esta propiedad es necesaria para que se aplique la transición. Habría que extraer un componente que tenga esta propiedad para desacoplar. */
+      firstCarouselItems: [1, 2, 3, 4, 5, 6],
     }
   },
-  methods: {
-    navCallback(offset) {  /* TODO: este metodo es necesario para que se aplique la transición. Habría que extraer un componente que lo tenga para desacoplar. */
-      this.offset += offset
-    },
-  }
 }
 </script>
 
 <style>
+  /* START Carousel related CSS: */
+  /*
+  - NOTE that the items must have:
+    * margin-right equal to itemMargin 
+    * width and height equal to itemWidth and itemHeight
+  */ 
+  .item {
+    margin-right: 10px; 
+    width: 200px;
+    height: 200px;
+  }
+  /* 
+  * IE11 fix: 
+  */
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+    .item {
+      margin-right: 210px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
+    }
+  }
+  /* FINISH Carousel related CSS: */  
+  
   #app {
     font-family : 'Ubuntu', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -159,44 +110,12 @@ export default {
     height: 100%;
   }
 
-  #first-line {
+  .first-line {
     background-color: #35495e;
     border: 1px solid #35495e;
   }
-  #second-line {
+  .second-line {
     background-color: #40B783;
     border: 1px solid #40B783;
-  }
-  
-  /*
-  - NOTAR que los items tienen que tener 
-    * un margin-right igual al que se le pasa al carousel por props (itemMargin) 
-    * un width y height igual al que se le pasa al carousel por props (itemWidth y itemHeight)
-  */ 
-  .item {
-    transition: transform 0.7s ease 0s; /* TODO: esta propiedad es necesaria para que se aplique la transición. Habría que extraer un componente que tenga esta propiedad para desacoplar. */
-
-    margin-right: 10px; 
-    width: 200px;
-    height: 200px;
-  }
-
-  .fourth-item {
-    transition: transform 0.7s ease 0s; /* TODO: esta propiedad es necesaria para que se aplique la transición. Habría que extraer un componente que tenga esta propiedad para desacoplar. */
-
-    margin-right: 5px; 
-    width: 100px;
-    height: 300px;
-  }
-
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-    /* IE10+ specific styles go here */
-    .item {
-      margin-right: 210px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
-    }
-
-    .fourth-item {
-      margin-right: 105px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
-    }
   }
 </style>

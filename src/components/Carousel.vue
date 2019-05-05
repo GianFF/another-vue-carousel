@@ -19,17 +19,18 @@
 <script>
   export default {
     name: 'Carousel',
-    props: ['itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'navCallback', 'itemsToSlide',],
+    props: ['itemsLength', 'itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'navCallback', 'itemsToSlide',],
     data() {
       return {
         // defaults:
-        itemsToShowData: this.itemsToShow      || 3, 
-        itemWidthData:   this.itemWidth        || 100, 
-        itemHeightData:  this.itemHeight       || 150, 
-        itemMarginData:  this.itemMarginRight  || 10, 
-        arrowMarginData: this.arrowMargin      || 0, 
-        arrowWidthData:  this.arrowWidth       || 15,
-        arrowHeightData: this.arrowHeight      || 20,
+        itemsLengthData:  this.itemsLength     || 6,
+        itemsToShowData:  this.itemsToShow     || 3, 
+        itemWidthData:    this.itemWidth       || 100, 
+        itemHeightData:   this.itemHeight      || 150, 
+        itemMarginData:   this.itemMarginRight || 10, 
+        arrowMarginData:  this.arrowMargin     || 0, 
+        arrowWidthData:   this.arrowWidth      || 15,
+        arrowHeightData:  this.arrowHeight     || 20,
         itemsToSlideData: this.itemsToSlide    || 2,
         index: 0,
       }
@@ -60,26 +61,34 @@
       },
       arrowRightStyles() {
         return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px`
-      }
+      },
     },
     methods: {
-      offset() {
-        const totalItemWidth = this.itemWidthData + this.itemMarginData
-        const offset = this.itemsToSlideData * totalItemWidth
-        return offset
+      rightHiddenItems() {
+        return this.itemsLengthData - this.itemsToShowData - this.index
+      },
+      leftHiddenItems() {
+        return this.index // there are too many hidden items in the left as the number of the index 
+      },
+      calculateItemsToSlide(hiddenItems) {
+        return Math.min(hiddenItems, this.itemsToSlideData)
       },
       navLeft() {
-        this.index -= this.itemsToSlideData
-        console.log(this.index)
-        this.navCallback(this.offset())
+        const itemsToSlide = this.calculateItemsToSlide(this.leftHiddenItems())
+        const offset = itemsToSlide * (this.itemWidthData + this.itemMarginData)
+        
+        this.index = Math.max(this.index - this.itemsToSlideData, 0) // this prevent index to be negative
+        this.navCallback(offset)
       },
       navRight() {
-        this.index += this.itemsToSlideData 
-        console.log(this.index)
-        this.navCallback(-this.offset())
+        const itemsToSlide = this.calculateItemsToSlide(this.rightHiddenItems())
+        const offset = itemsToSlide * (this.itemWidthData + this.itemMarginData)
+      
+        this.index += itemsToSlide 
+        this.navCallback(-offset)
       },
       canNavRight() {
-        return true 
+        return this.rightHiddenItems() > 0
       },
       canNavLeft() {
         return this.index > 0 

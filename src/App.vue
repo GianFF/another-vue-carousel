@@ -12,7 +12,8 @@
       <hr id="second-line">
     </div>
 
-    <Carousel :itemsToShow="3" 
+    <Carousel :itemsLength="items.length"
+              :itemsToShow="3" 
               :itemWidth="200" 
               :itemHeight="200" 
               :itemMarginRight="10" 

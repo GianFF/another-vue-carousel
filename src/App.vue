@@ -97,4 +97,10 @@ export default {
     width: 200px;
     height: 200px;
   }
+  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
+    /* IE10+ specific styles go here */
+    .item {
+      margin-right: 210px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
+    }
+  }
 </style>

@@ -19,7 +19,7 @@
 <script>
   export default {
     name: 'Carousel',
-    props: ['itemsLength', 'itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'navCallback', 'itemsToSlide',],
+    props: ['itemsLength', 'itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'itemsToSlide',],
     data() {
       return {
         // defaults:
@@ -72,6 +72,9 @@
       },
       calculateItemsToSlide(hiddenItems) {
         return Math.min(hiddenItems, this.itemsToSlideData)
+      },
+      navCallback(offset) {
+        this.$eventBus.$emit('navCallback', offset)
       },
       navLeft() {
         const itemsToSlide = this.calculateItemsToSlide(this.leftHiddenItems()) // caouse of this calculation using he hidden items we don't need to double check if it can navLeft

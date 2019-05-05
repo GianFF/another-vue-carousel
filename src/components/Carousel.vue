@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-container" v-bind:style="carouselContainerStyles">
-    <div v-if="navLeftEnabled" v-on:click="navLeft" class="nav nav-left" v-bind:style="arrowLeftStyles">
+    <div v-on:click="navLeft" class="nav nav-left" v-bind:style="`${arrowLeftStyles}; ${!navLeftEnabled ? `visibility: hidden` : ``}`">
       <div class="chevron-wrapper">
         <font-awesome-icon icon="chevron-left"></font-awesome-icon>
       </div>
@@ -8,7 +8,7 @@
     <div class="carousel-content" v-bind:style="contentStyles" >
       <slot></slot>
     </div>
-    <div v-if="navRightEnabled" v-on:click="navRight" class="nav nav-right" v-bind:style="arrowRightStyles">
+    <div v-on:click="navRight" class="nav nav-right" v-bind:style="`${arrowRightStyles}; ${!navRightEnabled ? `visibility: hidden` : ``}`">
       <div class="chevron-wrapper">
         <font-awesome-icon icon="chevron-right"></font-awesome-icon>
       </div>
@@ -74,14 +74,14 @@
         return Math.min(hiddenItems, this.itemsToSlideData)
       },
       navLeft() {
-        const itemsToSlide = this.calculateItemsToSlide(this.leftHiddenItems())
+        const itemsToSlide = this.calculateItemsToSlide(this.leftHiddenItems()) // caouse of this calculation using he hidden items we don't need to double check if it can navLeft
         const offset = itemsToSlide * (this.itemWidthData + this.itemMarginData)
         
         this.index = Math.max(this.index - this.itemsToSlideData, 0) // this prevent index to be negative
         this.navCallback(offset)
       },
       navRight() {
-        const itemsToSlide = this.calculateItemsToSlide(this.rightHiddenItems())
+        const itemsToSlide = this.calculateItemsToSlide(this.rightHiddenItems()) // caouse of this calculation using he hidden items we don't need to double check if it can navRigth
         const offset = itemsToSlide * (this.itemWidthData + this.itemMarginData)
       
         this.index += itemsToSlide 

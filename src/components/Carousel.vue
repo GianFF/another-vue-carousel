@@ -22,7 +22,7 @@
     props: ['itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight',],
     data() {
       return {
-        // se definen algunas propiedades por default:
+        // defaults:
         itemsToShowData: this.itemsToShow      || 3, 
         itemWidthData:   this.itemWidth        || 100, 
         itemHeightData:  this.itemHeight       || 150, 
@@ -47,20 +47,11 @@
         const width = this.contentWidth + this.arrowWidthData * 2
         return `width: ${width}px; height: ${this.itemHeightData}px;`
       },
-      // arrowRightXPosition() {
-      //   return this.contentWidth
-      // },
-      // arrowYPosition() {
-      //   return (this.itemHeightData / 2) + (this.arrowHeightData / 2) 
-      // },
-      // arrowLeftXPosition() {
-      //   return -this.arrowWidthData
-      // },
       arrowLeftStyles() {
-        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px;` //top: ${this.arrowYPosition}px; left: ${this.arrowLeftXPosition}px;
+        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px;`
       },
       arrowRightStyles() {
-        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px;` //top: ${this.arrowYPosition}px; left: ${this.arrowRightXPosition}px;
+        return `width: ${this.arrowWidthData}px; height: ${this.arrowHeightData}px;`
       }
     },
     methods: {
@@ -87,9 +78,9 @@
 
     overflow: hidden;
   }
-
+  
+  /* TODO: estos estilos deberian estar en el componente Arrow que deberia pasarsele al carousel */ 
   .nav {    
-    /* TODO: estos estilos deberian estar en el componente Arrow que deberia pasarsele al carousel */ 
     background-color: #cac4c4;
     
     display: flex;

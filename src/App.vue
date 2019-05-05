@@ -52,9 +52,6 @@ export default {
     align-items: center;
   }
 
-  #title {
-    margin-bottom: 60px;
-  }
   h1, h5, h2 {
     margin-bottom: 5px;
     margin-top: 5px;
@@ -67,6 +64,9 @@ export default {
   }
 
   .separator {
+    margin-top: 60px;
+    margin-bottom: 60px;
+
     width: 80%;
     height: 10px;
   }
@@ -86,10 +86,7 @@ export default {
     background-color: #40B783;
     border: 1px solid #40B783;
   }
-
-  #first-carousel {
-    margin-top: 60px;
-  }
+  
   /*
   - NOTAR que los items tienen que tener 
     * un margin-right igual al que se le pasa al carousel por props (itemMargin) 

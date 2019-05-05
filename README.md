@@ -1,29 +1,41 @@
-# another-vue-carousel
+### How to use it:
 
-## Project setup
 ```
-yarn install
-```
+    <!-- Carousel configuration: -->
+    <Carousel :itemsLength="items.length"
+              :itemsToShow="3" 
+              :itemWidth="200" 
+              :itemHeight="200" 
+              :itemMarginRight="10" 
+              :arrowMargin="0" 
+              :arrowWidth="20" 
+              :arrowHeight="50" 
+              id="carousel">
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+      <template v-slot:left-arrow>
+        <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
+      </template>
+              
+      <CarouselItem v-for="item in items" v-bind:key="`item-${item}`">
+        <MyItem/>
+      </CarouselItem>
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+      <template v-slot:right-arrow>
+        <MyArrow :navDirection="'right'" :icon="'chevron-right'"/>
+      </template>
+    </Carousel>
 
-### Run your tests
-```
-yarn run test
-```
+ /*
+  MyArrow styles:
 
-### Lints and fixes files
-```
-yarn run lint
-```
+  - NOTE that the arrows must have:
+    * width equal to arrowWidth in the Carousel
+    * height equal to arrowHeight in the Carousel
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+  MyComponent styles:
+  
+  - NOTE that the items must have:
+    * margin-right equal to itemMargin in the Carousel
+    * width and height equal to itemWidth and itemHeight in the Carousel
+  */ 
+```

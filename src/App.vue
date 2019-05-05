@@ -23,7 +23,7 @@
               :arrowHeight="50" 
               id="carousel">
       <CarouselItem v-for="item in firstCarouselItems" v-bind:key="`item-${item}`">
-        <img alt="Vue logo" src="./assets/logo.png" class="item">
+        <MyItem/>
       </CarouselItem>
     </Carousel>
 
@@ -33,12 +33,14 @@
 <script>
 import Carousel from './components/Carousel.vue'
 import CarouselItem from './components/CarouselItem.vue'
+import MyItem from './components/MyItem.vue'
 
 export default {
   name: 'app',
   components: {
     Carousel,
     CarouselItem,
+    MyItem,
   },
   data() {
     return {
@@ -49,27 +51,6 @@ export default {
 </script>
 
 <style>
-  /* START Carousel related CSS: */
-  /*
-  - NOTE that the items must have:
-    * margin-right equal to itemMargin 
-    * width and height equal to itemWidth and itemHeight
-  */ 
-  .item {
-    margin-right: 10px; 
-    width: 200px;
-    height: 200px;
-  }
-  /* 
-  * IE11 fix: 
-  */
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-    .item {
-      margin-right: 210px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
-    }
-  }
-  /* FINISH Carousel related CSS: */  
-  
   #app {
     font-family : 'Ubuntu', sans-serif;
     -webkit-font-smoothing: antialiased;

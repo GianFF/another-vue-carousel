@@ -22,11 +22,12 @@ export default {
     height: 200px;
   }
   /* 
-  * IE11 fix: 
-  */
+  * IE11 fix, you will need this when the component is inlined in the Carousel  
+  
   @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
     .item {
-      margin-right: 210px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
+      margin-right: 210px!important // in order to work in IE10+ we have to add up the item width to the item margin
     }
   }
+  */
 </style>

@@ -12,8 +12,7 @@
       <hr class="second-line">
     </div>
 
-    <h3> This Carousel isn't coupled with the items </h3>
-    <Carousel :itemsLength="firstCarouselItems.length"
+    <Carousel :itemsLength="items.length"
               :itemsToShow="3" 
               :itemWidth="200" 
               :itemHeight="200" 
@@ -22,11 +21,18 @@
               :arrowWidth="20" 
               :arrowHeight="50" 
               id="carousel">
-      <CarouselItem v-for="item in firstCarouselItems" v-bind:key="`item-${item}`">
+      <template v-slot:left-arrow>
+        <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
+      </template>
+              
+      <CarouselItem v-for="item in items" v-bind:key="`item-${item}`">
         <MyItem/>
       </CarouselItem>
-    </Carousel>
 
+      <template v-slot:right-arrow>
+        <MyArrow :navDirection="'right'" :icon="'chevron-right'"/>
+      </template>
+    </Carousel>
   </div>
 </template>
 
@@ -34,6 +40,7 @@
 import Carousel from './components/Carousel.vue'
 import CarouselItem from './components/CarouselItem.vue'
 import MyItem from './components/MyItem.vue'
+import MyArrow from './components/MyArrow.vue'
 
 export default {
   name: 'app',
@@ -41,10 +48,11 @@ export default {
     Carousel,
     CarouselItem,
     MyItem,
+    MyArrow,
   },
   data() {
     return {
-      firstCarouselItems: [1, 2, 3, 4, 5, 6],
+      items: [1, 2, 3, 4, 5, 6],
     }
   },
 }

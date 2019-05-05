@@ -1,17 +1,13 @@
 <template>
   <div class="carousel-container" v-bind:style="carouselContainerStyles">
-    <div v-on:click="navLeft" class="nav nav-left" v-bind:style="`${arrowLeftStyles}; ${!navLeftEnabled ? `visibility: hidden` : ``}`">
-      <div class="chevron-wrapper">
-        <font-awesome-icon icon="chevron-left"></font-awesome-icon>
-      </div>
+    <div v-on:click="navLeft" v-bind:style="`${arrowLeftStyles}; ${!navLeftEnabled ? `visibility: hidden` : ``}`">
+      <slot name="left-arrow"></slot>
     </div>
     <div class="carousel-content" v-bind:style="contentStyles" >
       <slot></slot>
     </div>
-    <div v-on:click="navRight" class="nav nav-right" v-bind:style="`${arrowRightStyles}; ${!navRightEnabled ? `visibility: hidden` : ``}`">
-      <div class="chevron-wrapper">
-        <font-awesome-icon icon="chevron-right"></font-awesome-icon>
-      </div>
+    <div v-on:click="navRight" v-bind:style="`${arrowRightStyles}; ${!navRightEnabled ? `visibility: hidden` : ``}`">
+      <slot name="right-arrow"></slot>
     </div>
   </div>
 </template>
@@ -112,23 +108,5 @@
     flex-direction: row;
 
     overflow: hidden;
-  }
-  
-  /* TODO: estos estilos deberian estar en el componente Arrow que deberia pasarsele al carousel */ 
-  .nav {    
-    background-color: #cac4c4;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .nav:hover {
-    cursor: pointer;
-  }
-  .nav-left {
-    border-radius: 3px 0 0 3px;
-  }
-  .nav-right {
-    border-radius: 0 3px 3px 0;
   }
 </style>

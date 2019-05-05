@@ -12,8 +12,7 @@
       <hr class="second-line">
     </div>
 
-    <h3> This Carousel isn't coupled with the items </h3>
-    <Carousel :itemsLength="firstCarouselItems.length"
+    <Carousel :itemsLength="items.length"
               :itemsToShow="3" 
               :itemWidth="200" 
               :itemHeight="200" 
@@ -22,54 +21,44 @@
               :arrowWidth="20" 
               :arrowHeight="50" 
               id="carousel">
-      <CarouselItem v-for="item in firstCarouselItems" v-bind:key="`item-${item}`">
-        <img alt="Vue logo" src="./assets/logo.png" class="item">
+      <template v-slot:left-arrow>
+        <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
+      </template>
+              
+      <CarouselItem v-for="item in items" v-bind:key="`item-${item}`">
+        <MyItem/>
       </CarouselItem>
-    </Carousel>
 
+      <template v-slot:right-arrow>
+        <MyArrow :navDirection="'right'" :icon="'chevron-right'"/>
+      </template>
+    </Carousel>
   </div>
 </template>
 
 <script>
 import Carousel from './components/Carousel.vue'
 import CarouselItem from './components/CarouselItem.vue'
+import MyItem from './components/MyItem.vue'
+import MyArrow from './components/MyArrow.vue'
 
 export default {
   name: 'app',
   components: {
     Carousel,
     CarouselItem,
+    MyItem,
+    MyArrow,
   },
   data() {
     return {
-      firstCarouselItems: [1, 2, 3, 4, 5, 6],
+      items: [1, 2, 3, 4, 5, 6],
     }
   },
 }
 </script>
 
 <style>
-  /* START Carousel related CSS: */
-  /*
-  - NOTE that the items must have:
-    * margin-right equal to itemMargin 
-    * width and height equal to itemWidth and itemHeight
-  */ 
-  .item {
-    margin-right: 10px; 
-    width: 200px;
-    height: 200px;
-  }
-  /* 
-  * IE11 fix: 
-  */
-  @media screen and (-ms-high-contrast: active), screen and (-ms-high-contrast: none) {
-    .item {
-      margin-right: 210px!important /* in order to work in IE10+ we have to add up the item width to the item margin */
-    }
-  }
-  /* FINISH Carousel related CSS: */  
-  
   #app {
     font-family : 'Ubuntu', sans-serif;
     -webkit-font-smoothing: antialiased;

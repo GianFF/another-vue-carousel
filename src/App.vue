@@ -97,8 +97,8 @@
 <script>
 import AVCarousel from './components/carousel/AVCarousel.vue'
 import AVCarouselItem from './components/carousel/AVCarouselItem.vue'
-import MyItem from './components/MyItem.vue'
-import MyArrow from './components/MyArrow.vue'
+import MyItem from './components/carousel-components/MyItem.vue'
+import MyArrow from './components/carousel-components/MyArrow.vue'
 
 export default {
   name: 'app',

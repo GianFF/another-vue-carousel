@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/logo.png" v-bind:class="`item ${number % 2 === 1 ? '' : 'item-inverted'}`">
+    <img alt="Vue logo" src="../../assets/logo.png" v-bind:class="`item ${number % 2 === 1 ? '' : 'item-inverted'}`">
   </div>
 </template>
 

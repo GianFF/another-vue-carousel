@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/logo.png" v-bind:class="`arrow ${navDirection}`">
+    <img alt="Vue logo" src="../../assets/logo.png" v-bind:class="`arrow ${navDirection}`">
   </div>
 </template>
 

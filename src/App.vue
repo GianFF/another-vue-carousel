@@ -24,9 +24,7 @@
 
               :id="'first-carousel'">
 
-      <template v-slot:left-arrow>
-        <div class="bordered-div-arrow">0</div>
-      </template>
+      <div slot="left-arrow" class="bordered-div-arrow">0</div>
               
       <AVCarouselItem v-for="item in items" 
                       v-bind:key="`item-${item}`" 
@@ -34,9 +32,7 @@
         <div class="bordered-div-item">{{item}}</div>
       </AVCarouselItem>
 
-      <template v-slot:right-arrow>
-        <div class="bordered-div-arrow">0</div>
-      </template>
+      <div slot="right-arrow" class="bordered-div-arrow">0</div>
     </AVCarousel>
 
      <div class="separator"> 
@@ -53,9 +49,7 @@
               :arrowWidth="20" 
               :arrowHeight="50" 
               :id="'second-carousel'">
-      <template v-slot:left-arrow>
-        <MyArrow :navDirection="'left'"/>
-      </template>
+      <MyArrow slot="left-arrow" :navDirection="'left'"/>
               
       <AVCarouselItem v-for="item in items" 
                       v-bind:key="`item-${item}`" 
@@ -63,9 +57,7 @@
         <MyItem :number="item"/>
       </AVCarouselItem>
 
-      <template v-slot:right-arrow>
-        <MyArrow :navDirection="'right'"/>
-      </template>
+      <MyArrow slot="right-arrow" :navDirection="'right'"/>
     </AVCarousel>
 
     <div class="separator"> 
@@ -84,9 +76,8 @@
               :arrowWidth="20" 
               :arrowHeight="50" 
               :id="'third-carousel'">
-      <template v-slot:left-arrow class="bordered-div-arrow">
-        <div class="bordered-div-arrow">0</div>
-      </template>
+
+      <div slot="left-arrow" class="bordered-div-arrow">0</div>
               
       <AVCarouselItem v-for="item in items" 
                       v-bind:key="`item-${item}`" 
@@ -94,9 +85,7 @@
         <div class="bordered-div-item">{{item}}</div>
       </AVCarouselItem>
 
-      <template v-slot:right-arrow>
-        <div class="bordered-div-arrow">0</div>
-      </template>
+      <div slot="right-arrow" class="bordered-div-arrow">0</div>
     </AVCarousel>
 
     <div class="separator"> 

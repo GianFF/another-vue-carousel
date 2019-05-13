@@ -15,12 +15,12 @@
 <script>
   export default {
     name: 'AVCarousel',
-    props: ['itemsCount', 'itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'itemsToSlide', 'id'],
+    props: ['itemsQuantiy', 'itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'itemsToSlide', 'id'],
     data() {
       return {
         // defaults:
         index: 0,
-        itemsCountData:   this.itemsCount      || 8,
+        itemsQuantiyData:   this.itemsQuantiy      || 8,
         itemsToShowData:  this.itemsToShow     || 4,
         itemsToSlideData: this.itemsToSlide    || 3,
         itemWidthData:    this.itemWidth       || 100,
@@ -61,7 +61,7 @@
     },
     methods: {
       rightHiddenItems() {
-        return this.itemsCountData - this.itemsToShowData - this.index
+        return this.itemsQuantiyData - this.itemsToShowData - this.index
       },
       leftHiddenItems() {
         return this.index // there are too many hidden items in the left as the number of the index

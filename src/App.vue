@@ -9,8 +9,9 @@
     <div class="separator"> 
       <hr class="first-line"><hr class="second-line">
     </div>
-    
-    <AVCarousel :itemsCount="items.length"
+
+    <!-- How do you use it? -->
+    <AVCarousel :itemsQuantity="items.length"
               :itemsToShow="3" 
               :itemsToSlide="2"
 
@@ -23,17 +24,22 @@
               :arrowHeight="50" 
 
               :id="'first-carousel'">
-
+      <!-- carousel arrow -->
       <div slot="left-arrow" class="bordered-div-arrow">0</div>
-              
+     
+      <!-- carousel items -->
       <AVCarouselItem v-for="item in items" 
                       v-bind:key="`item-${item}`" 
                       :id="'first-carousel'">
+
         <div class="bordered-div-item">{{item}}</div>
       </AVCarouselItem>
 
+      <!-- carousel arrow -->
       <div slot="right-arrow" class="bordered-div-arrow">0</div>
     </AVCarousel>
+
+    <!-- Example of a nice one: -->
 
      <div class="separator"> 
        <hr class="first-line"><hr class="second-line">
@@ -59,6 +65,8 @@
 
       <MyArrow slot="right-arrow" :navDirection="'right'"/>
     </AVCarousel>
+
+    <!-- Buggie one: -->
 
     <div class="separator"> 
       <hr class="first-line"><hr class="second-line">

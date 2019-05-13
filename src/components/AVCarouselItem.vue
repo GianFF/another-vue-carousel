@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel-item-container" v-bind:style="`transform: translateX(${offset}px)`">
+  <div class="av-carousel-item-container" v-bind:style="`transform: translateX(${offset}px)`">
     <slot></slot>
   </div>
 </template>
@@ -19,7 +19,8 @@
       },
     },
     created() {
-      this.$eventBus.$on(`navCallback-${this.id}`, (offset) => {
+      const event = `navCallback-${this.id}`
+      this.$eventBus.$on(event, (offset) => {
         this.navCallback(offset)
       });
     }
@@ -27,7 +28,7 @@
 </script>
 
 <style scoped>
-  .carousel-item-container {
+  .av-carousel-item-container {
     transition: transform 0.7s ease 0s; 
   }
 </style>

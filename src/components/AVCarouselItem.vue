@@ -7,7 +7,7 @@
 <script>
   export default {
     name: 'AVCarouselItem',
-    props: [],
+    props: ['id'],
     data() {
       return {
         offset: 0,
@@ -19,7 +19,7 @@
       },
     },
     created() {
-      this.$eventBus.$on('navCallback', (offset) => {
+      this.$eventBus.$on(`navCallback-${this.id}`, (offset) => {
         this.navCallback(offset)
       });
     }

@@ -20,7 +20,7 @@
               :arrowMargin="0" 
               :arrowWidth="20" 
               :arrowHeight="50" 
-              id="carousel">
+              :id="'first-carousel'">
       <template v-slot:left-arrow>
         <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
       </template>

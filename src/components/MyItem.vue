@@ -1,12 +1,13 @@
 <template>
   <div>
-    <img alt="Vue logo" src="../assets/logo.png" class="item">
+    <img alt="Vue logo" src="../assets/logo.png" v-bind:class="`item ${number % 2 === 1 ? '' : 'item-inverted'}`">
   </div>
 </template>
 
 <script>
 export default {
   name: 'MyItem',
+  props: ['number'],
 }
 </script>
 
@@ -20,6 +21,11 @@ export default {
     margin-right: 10px; 
     width: 200px;
     height: 200px;
+  }
+
+  .item-inverted {
+    -webkit-filter: invert(1);
+    filter: invert(100%);
   }
   /* 
   * IE11 fix, you will need this when the component is inlined in the Carousel  

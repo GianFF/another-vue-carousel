@@ -3,7 +3,6 @@
 
     <div id="title"> 
       <h1> Implementing a Carousel in Vue.js</h1>
-      <h5> (as if nobody had done it yet ...) </h5>
       <h2> In order to work in IE11 </h2>
     </div>
 
@@ -12,7 +11,7 @@
       <hr class="second-line">
     </div>
 
-    <AVCarousel :itemsLength="items.length"
+    <AVCarousel :itemsCount="items.length"
               :itemsToShow="3" 
               :itemsToSlide="2"
               :itemWidth="200" 
@@ -74,14 +73,14 @@ export default {
     align-items: center;
   }
 
-  h1, h5, h2 {
+  h1, h2 {
     margin-bottom: 5px;
     margin-top: 5px;
   }
-  h1, h2 {
+  h1 {
     color: #35495e
   }
-  h5 {
+  h2 {
     color: #40B783;
   }
 

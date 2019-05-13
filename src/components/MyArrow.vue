@@ -30,9 +30,9 @@ export default {
     cursor: pointer;
   }
   .left {
-    transform: rotate(90deg);
+    transform: rotate(270deg);
   }
   .right {
-    transform: rotate(270deg);
+    transform: rotate(90deg);
   }
 </style>

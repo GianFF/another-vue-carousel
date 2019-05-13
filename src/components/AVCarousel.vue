@@ -14,7 +14,7 @@
 
 <script>
   export default {
-    name: 'Carousel',
+    name: 'AVCarousel',
     props: ['itemsLength', 'itemsToShow', 'itemWidth', 'itemHeight', 'itemMarginRight', 'arrowMargin', 'arrowWidth', 'arrowHeight', 'itemsToSlide',],
     data() {
       return {

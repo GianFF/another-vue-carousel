@@ -12,7 +12,7 @@
       <hr class="second-line">
     </div>
 
-    <Carousel :itemsLength="items.length"
+    <AVCarousel :itemsLength="items.length"
               :itemsToShow="3" 
               :itemWidth="200" 
               :itemHeight="200" 
@@ -25,28 +25,28 @@
         <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
       </template>
               
-      <CarouselItem v-for="item in items" v-bind:key="`item-${item}`">
+      <AVCarouselItem v-for="item in items" v-bind:key="`item-${item}`">
         <MyItem/>
-      </CarouselItem>
+      </AVCarouselItem>
 
       <template v-slot:right-arrow>
         <MyArrow :navDirection="'right'" :icon="'chevron-right'"/>
       </template>
-    </Carousel>
+    </AVCarousel>
   </div>
 </template>
 
 <script>
-import Carousel from './components/Carousel.vue'
-import CarouselItem from './components/CarouselItem.vue'
+import AVCarousel from './components/AVCarousel.vue'
+import AVCarouselItem from './components/AVCarouselItem.vue'
 import MyItem from './components/MyItem.vue'
 import MyArrow from './components/MyArrow.vue'
 
 export default {
   name: 'app',
   components: {
-    Carousel,
-    CarouselItem,
+    AVCarousel,
+    AVCarouselItem,
     MyItem,
     MyArrow,
   },

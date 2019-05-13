@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'CarouselItem',
+    name: 'AVCarouselItem',
     props: [],
     data() {
       return {

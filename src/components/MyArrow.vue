@@ -1,15 +1,13 @@
 <template>
-  <div v-bind:class="`nav ${navDirection === 'left' ? 'nav-left' : 'nav-right'}`">
-    <div class="chevron-wrapper">
-      <font-awesome-icon :icon="icon"></font-awesome-icon>
-    </div>
+  <div>
+    <img alt="Vue logo" src="../assets/logo.png" v-bind:class="`arrow ${navDirection}`">
   </div>
 </template>
 
 <script>
 export default {
   name: 'MyArrow',
-  props: ['navDirection', 'icon'],
+  props: ['navDirection'],
 }
 </script>
 
@@ -19,22 +17,22 @@ export default {
     * width equal to arrowWidth in the Carousel
     * height equal to arrowHeight in the Carousel
   */ 
-  .nav {    
+  .arrow {
     width: 20px; 
     height: 50px; 
-    
-    background-color: #cac4c4;
+        
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .nav:hover {
+
+  .arrow:hover {
     cursor: pointer;
   }
-  .nav-left {
-    border-radius: 3px 0 0 3px;
+  .left {
+    transform: rotate(90deg);
   }
-  .nav-right {
-    border-radius: 0 3px 3px 0;
+  .right {
+    transform: rotate(270deg);
   }
 </style>

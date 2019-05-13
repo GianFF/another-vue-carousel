@@ -14,6 +14,7 @@
 
     <AVCarousel :itemsLength="items.length"
               :itemsToShow="3" 
+              :itemsToSlide="2"
               :itemWidth="200" 
               :itemHeight="200" 
               :itemMarginRight="10" 
@@ -22,7 +23,7 @@
               :arrowHeight="50" 
               :id="'first-carousel'">
       <template v-slot:left-arrow>
-        <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
+        <MyArrow :navDirection="'left'"/>
       </template>
               
       <AVCarouselItem v-for="item in items" v-bind:key="`item-${item}`" :id="'first-carousel'">
@@ -30,7 +31,7 @@
       </AVCarouselItem>
 
       <template v-slot:right-arrow>
-        <MyArrow :navDirection="'right'" :icon="'chevron-right'"/>
+        <MyArrow :navDirection="'right'"/>
       </template>
     </AVCarousel>
   </div>

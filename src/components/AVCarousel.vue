@@ -1,9 +1,9 @@
 <template>
-  <div class="carousel-container" v-bind:style="carouselContainerStyles">
+  <div class="av-carousel-container" v-bind:style="carouselContainerStyles">
     <div v-on:click="navLeft" v-bind:style="`${arrowLeftStyles}; ${!navLeftEnabled ? `visibility: hidden` : ``}`">
       <slot name="left-arrow"></slot>
     </div>
-    <div class="carousel-content" v-bind:style="contentStyles" >
+    <div class="av-carousel-content" v-bind:style="contentStyles" >
       <slot></slot>
     </div>
     <div v-on:click="navRight" v-bind:style="`${arrowRightStyles}; ${!navRightEnabled ? `visibility: hidden` : ``}`">
@@ -19,16 +19,16 @@
     data() {
       return {
         // defaults:
-        itemsLengthData:  this.itemsLength     || 6,
-        itemsToShowData:  this.itemsToShow     || 3, 
-        itemWidthData:    this.itemWidth       || 100, 
-        itemHeightData:   this.itemHeight      || 150, 
-        itemMarginData:   this.itemMarginRight || 10, 
-        arrowMarginData:  this.arrowMargin     || 0, 
+        index: 0,
+        itemsLengthData:  this.itemsLength     || 8,
+        itemsToShowData:  this.itemsToShow     || 4,
+        itemsToSlideData: this.itemsToSlide    || 3,
+        itemWidthData:    this.itemWidth       || 100,
+        itemHeightData:   this.itemHeight      || 150,
+        itemMarginData:   this.itemMarginRight || 10,
+        arrowMarginData:  this.arrowMargin     || 0,
         arrowWidthData:   this.arrowWidth      || 15,
         arrowHeightData:  this.arrowHeight     || 20,
-        itemsToSlideData: this.itemsToSlide    || 2,
-        index: 0,
       }
     },
     computed: {
@@ -64,46 +64,47 @@
         return this.itemsLengthData - this.itemsToShowData - this.index
       },
       leftHiddenItems() {
-        return this.index // there are too many hidden items in the left as the number of the index 
+        return this.index // there are too many hidden items in the left as the number of the index
       },
       calculateItemsToSlide(hiddenItems) {
         return Math.min(hiddenItems, this.itemsToSlideData)
       },
       navCallback(offset) {
-        this.$eventBus.$emit(`navCallback-${this.id}`, offset)
+        const event = `navCallback-${this.id}`
+        this.$eventBus.$emit(event, offset)
       },
       navLeft() {
         const itemsToSlide = this.calculateItemsToSlide(this.leftHiddenItems()) // caouse of this calculation using he hidden items we don't need to double check if it can navLeft
         const offset = itemsToSlide * (this.itemWidthData + this.itemMarginData)
-        
+
         this.index = Math.max(this.index - this.itemsToSlideData, 0) // this prevent index to be negative
         this.navCallback(offset)
       },
       navRight() {
         const itemsToSlide = this.calculateItemsToSlide(this.rightHiddenItems()) // caouse of this calculation using he hidden items we don't need to double check if it can navRigth
         const offset = itemsToSlide * (this.itemWidthData + this.itemMarginData)
-      
-        this.index += itemsToSlide 
+
+        this.index += itemsToSlide
         this.navCallback(-offset)
       },
       canNavRight() {
         return this.rightHiddenItems() > 0
       },
       canNavLeft() {
-        return this.index > 0 
+        return this.index > 0
       },
     },
   }
 </script>
 
 <style scoped>
-  .carousel-container {
+  .av-carousel-container {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
 
-  .carousel-content {
+  .av-carousel-content {
     display: flex;
     flex-direction: row;
 

@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import AVCarousel from './components/AVCarousel.vue'
-import AVCarouselItem from './components/AVCarouselItem.vue'
+import AVCarousel from './components/carousel/AVCarousel.vue'
+import AVCarouselItem from './components/carousel/AVCarouselItem.vue'
 import MyItem from './components/MyItem.vue'
 import MyArrow from './components/MyArrow.vue'
 

@@ -25,7 +25,7 @@
         <MyArrow :navDirection="'left'" :icon="'chevron-left'"/>
       </template>
               
-      <AVCarouselItem v-for="item in items" v-bind:key="`item-${item}`">
+      <AVCarouselItem v-for="item in items" v-bind:key="`item-${item}`" :id="'first-carousel'">
         <MyItem/>
       </AVCarouselItem>
 
